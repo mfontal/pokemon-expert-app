@@ -1,17 +1,22 @@
-import { useFetchPokemons } from "../hooks/useFetchPokemons";
+import { useFetchPokemons } from '../hooks/useFetchPokemons';
 
 export const PokemonCard = ({ pokemon }) => {
+    const { pokemonData, isLoading } = useFetchPokemons(pokemon);
 
-   const { pokemonData, isLoading } = useFetchPokemons(pokemon)
+    // console.log({pokemonData, isLoading});
 
-   // console.log({pokemonData, isLoading});
-
-   return (
-      <div className="PokemonCard">
-         <h2>{pokemon}</h2>
-         {isLoading && (<h2>Cargando</h2>)}
-         <img src={pokemonData.sprite} alt="Rayquaza" />
-         <p>PokeDex: {pokemonData.id}</p>
-      </div>
-   );
+    return (
+        <div className="PokemonCard">
+            <h2>{pokemon}</h2>
+            {isLoading && <h2>Cargando</h2>}
+            <img
+                src={pokemonData.sprite}
+                alt="Rayquaza"
+            />
+            <p>PokeDex: {pokemonData.id}</p>
+            {pokemonData.types?.map((type) => (
+                <p key={type.slot}>Tipo: {type.type.name}</p>
+            ))}
+        </div>
+    );
 };

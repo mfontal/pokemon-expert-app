@@ -3,13 +3,15 @@ export const getPokemon = async (pokemon) => {
    const resp = await fetch(url);
 
    const pokeInfo = await resp.json();
+   console.log(pokeInfo.id);
 
    // const typesArray = pokeInfo.types.map(type => {type.type.name});
-   // const typesArray = types.map(type => type.type.name);
+//    const typesArray = types.map(type => type.type.name);
    const getPokemonInfo = () => ({
       id: pokeInfo.id,
       sprite: pokeInfo.sprites.front_default,
-      // types: {typesArray},
+      types: pokeInfo.types,
+    //   types: {typesArray},
    });
 
    // Uso de la función para obtener la información deseada
